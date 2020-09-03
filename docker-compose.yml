@@ -1,0 +1,88 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports :
+      - 15672:15672
+      - 5672:5672
+  authService:
+    image: authenticationservicefinal
+    build : authenticationservice/
+    restart: always
+    network_mode: host
+    depends_on:
+      - mysql
+      - eurekaservice
+      - rabbitmq
+    ports:
+      - 8084:8084
+    healthcheck : 
+        test : "exit 0"
+
+  usertrackservice:
+    image: usertrackservicefinal
+    build : usertrackservice/
+    restart: always
+    network_mode: host
+    depends_on:
+      - mongo
+      - eurekaservice
+      - rabbitmq
+    ports:
+      - 8085:8085
+    healthcheck : 
+        test : "exit 0"
+
+  eurekaservice:
+    image: siranjujugi/eurekaservicev1:v2
+    restart: always
+    network_mode: host
+    ports:
+      - 9003:9003
+    healthcheck : 
+        test : "exit 0"
+
+  # orchestrationservice:
+  #   image: siranjujugi/orchestrationservicev1:v2
+  #   restart: always
+  #   network_mode: host
+  #   depends_on:
+  #     - authService
+  #     - usertrackservice
+  #   ports:
+  #     - 8088:8088
+
+  zuulservice:
+    image: siranjujugi/zuulservicev1:v2
+    restart: always
+    network_mode: host
+    ports:
+      - 8089:8089
+    healthcheck : 
+        test : "exit 0"
+
+  angular:
+    image: muzixappfinal
+    build : ./
+    network_mode: host
+    ports:
+      - 8080:8080
+    healthcheck : 
+        test : "exit 0"
+
+  mysql:
+    image: mysql:5.5
+    ports:
+      - 3306:3306
+    network_mode: host
+    environment : 
+      MYSQL_ROOT_PASSWORD : root123
+      MYSQL_DATABASE : userdb
+      MYSQL_USER : approot
+      MYSQL_PASSWORD : root123
+
+  mongo:
+    image: mongo:3.4-jessie
+    ports:
+      - 27017:27017
+    network_mode: host

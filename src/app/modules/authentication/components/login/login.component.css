@@ -1,0 +1,44 @@
+mat-card{
+    display : flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 40vw;
+    text-align: center;
+    background-color: #424242;
+    margin: auto;
+    margin-bottom: 10vh;
+}
+mat-card-title{
+    color : #fff;
+    font-size : 1.2em;
+    font-family: 'Lobster', cursive;
+    padding-left: 15vw;
+    padding-top: 5vh;
+}
+.my-form {
+    display : flex;
+    flex-direction: column;
+    width : 15vw;
+    margin : auto;
+}
+.label {
+    color : #fff;
+    font-size: 1.2em;
+    font-family: 'Satisfy', cursive;
+}
+mat-icon {
+    margin-right : lem;
+    color : #9c1148;
+}
+
+.matInputdata{
+    color : #fff;
+    font-size : 1.2em;
+    font-family: 'Satisfy', cursive;
+}
+
+.mat-fab, .mat-flat-button, .mat-mini-fab, .mat-raised-button {
+    background:  #9c1148;
+    font-size : 1.2em;
+    font-family: 'Lobster', cursive;
+}

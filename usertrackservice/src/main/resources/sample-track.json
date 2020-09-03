@@ -1,0 +1,12 @@
+{
+  "trackId": "track6278",
+  "trackName": "test",
+  "comments": "hello",
+  "artist": {
+    "artistId": 2,
+    "name": "art",
+    "image": {
+      "imageId": 4
+    }
+  }
+}
